@@ -57,6 +57,10 @@ namespace LocalModAssistant.Models
         public void Load()
         {
             if (!File.Exists(this.filePath)) {
+                if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), FilePath.ModsDirectoryName))) {
+                    Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), FilePath.ModsDirectoryName));
+                }
+                this._setting.ModDirectory = Path.Combine(Directory.GetCurrentDirectory(), FilePath.ModsDirectoryName);
                 this.Save();
             }
             else {

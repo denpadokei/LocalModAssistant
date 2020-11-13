@@ -7,5 +7,6 @@ namespace LocalModAssistant.Statics
     public static class FilePath
     {
         public const string SettingFileName = "Setting.json";
+        public const string ModsDirectoryName = "Mods";
     }
 }

@@ -5,6 +5,7 @@ using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Unity;
 
@@ -72,6 +73,21 @@ namespace LocalModAssistant.ViewModels
                 return;
             }
             this.ModDirectory = dlg.FileName;
+        }
+
+        private DelegateCommand _openFolderCommand;
+        public DelegateCommand OpenFolderCommand =>
+            _openFolderCommand ?? (_openFolderCommand = new DelegateCommand(ExecuteOpenFolderCommand));
+
+        void ExecuteOpenFolderCommand()
+        {
+            try {
+                Process.Start("EXPLORER.EXE", this.ModDirectory);
+            }
+            catch (Exception e) {
+                Debug.WriteLine($"{e}");
+            }
+            
         }
         #endregion
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
