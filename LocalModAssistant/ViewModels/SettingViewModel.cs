@@ -53,6 +53,10 @@ namespace LocalModAssistant.ViewModels
             {
                 IsFolderPicker = true
             };
+            if (!string.IsNullOrEmpty(this._setting.InstallDirectory)) {
+                dlg.InitialDirectory = this._setting.InstallDirectory;
+            }
+
             if (dlg.ShowDialog() != CommonFileDialogResult.Ok) {
                 return;
             }
@@ -69,6 +73,10 @@ namespace LocalModAssistant.ViewModels
             {
                 IsFolderPicker = true
             };
+            if (!string.IsNullOrEmpty(this._setting.ModDirectory)) {
+                dlg.InitialDirectory = this._setting.ModDirectory;
+            }
+
             if (dlg.ShowDialog() != CommonFileDialogResult.Ok) {
                 return;
             }
