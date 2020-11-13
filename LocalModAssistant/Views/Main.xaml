@@ -13,6 +13,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Content="Setting" Command="{Binding SettingCommand}" Grid.Row="0"></Button>
-        <Button Content="Install" Command="{Binding InstallCommand}" Grid.Row="1"></Button>
+        <Button Content="Install" Command="{Binding InstallCommand}" IsEnabled="{Binding IsInstallEnable}" Grid.Row="1"></Button>
     </Grid>
 </UserControl>

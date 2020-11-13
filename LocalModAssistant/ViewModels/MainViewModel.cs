@@ -17,7 +17,15 @@ namespace LocalModAssistant.ViewModels
     {
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
         #region // プロパティ
-        
+        /// <summary>説明 を取得、設定</summary>
+        private bool isInstallEnable_;
+        /// <summary>説明 を取得、設定</summary>
+        public bool IsInstallEnable
+        {
+            get => this.isInstallEnable_;
+
+            set => this.SetProperty(ref this.isInstallEnable_, value);
+        }
         #endregion
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
         #region // コマンド
@@ -61,6 +69,10 @@ namespace LocalModAssistant.ViewModels
         {
             this._domain.Save();
         }
+        private void OnSettingPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.IsInstallEnable = !string.IsNullOrEmpty(this._setting.InstallDirectory) && !string.IsNullOrEmpty(this._setting.ModDirectory);
+        }
         #endregion
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
         #region // メンバ変数
@@ -73,6 +85,7 @@ namespace LocalModAssistant.ViewModels
         public MainViewModel(ISetting setting, IDialogService dialogService, IMainDomain domain)
         {
             this._setting = setting;
+            this._setting.PropertyChanged += this.OnSettingPropertyChanged;
             this._dialogService = dialogService;
             this._domain = domain;
             this.LoadSettings();
