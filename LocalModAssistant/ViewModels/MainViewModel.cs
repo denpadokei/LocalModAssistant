@@ -26,6 +26,16 @@ namespace LocalModAssistant.ViewModels
 
             set => this.SetProperty(ref this.isInstallEnable_, value);
         }
+
+        /// <summary>ヒント を取得、設定</summary>
+        private string hint_;
+        /// <summary>ヒント を取得、設定</summary>
+        public string Hint
+        {
+            get => this.hint_;
+
+            set => this.SetProperty(ref this.hint_, value);
+        }
         #endregion
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
         #region // コマンド
@@ -79,6 +89,8 @@ namespace LocalModAssistant.ViewModels
         ISetting _setting;
         IDialogService _dialogService;
         IMainDomain _domain;
+
+        private readonly static string HintText = "使い方\r\n1.ビーセイのインストールフォルダを指定します。\r\n2.ModsフォルダにzipのままMODを配置します。\r\n3.インストールボタンを押します。\r\n※zipの中身の構成インストールフォルダ以下をそのまま再現した形で作成してください。";
         #endregion
         //ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*ﾟ+｡｡+ﾟ*｡+ﾟ ﾟ+｡*
         #region // 構築・破棄
@@ -89,6 +101,7 @@ namespace LocalModAssistant.ViewModels
             this._dialogService = dialogService;
             this._domain = domain;
             this.LoadSettings();
+            this.Hint = HintText;
         }
         #endregion
     }
